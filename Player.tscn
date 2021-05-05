@@ -11,7 +11,7 @@ extents = Vector2( 6.1991, 18.8226 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 9.10964, 0.728236 )
 
-[node name="Body" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D"]
 scale = Vector2( 5.49272, 5.49272 )
 script = ExtResource( 3 )
 
