@@ -10,7 +10,7 @@ func get_input():
 
 	var look_vec = get_global_mouse_position() - global_position
 	global_rotation = atan2(look_vec.y, look_vec.x)
-	print(look_vec)
+	#print(look_vec)
 	if look_vec.x <= 0:
 		get_parent().get_node("Sprite").flip_h=true
 		position.x = neg_x
