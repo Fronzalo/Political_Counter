@@ -12,10 +12,12 @@ func _ready():
 
 
 
+
 func _physics_process(delta):
 #	velocity = position.direction_to(player.position) * speed
 	velocity = target * speed
 	if move : move_and_slide(velocity)
+	
 		
 	
 		
@@ -34,3 +36,8 @@ func _on_Pause_timeout():
 	move = false
 	$Go.wait_time = rand_range(3,6)
 	$Go.start()
+
+
+func _on_Area2D_body_entered(body):
+	if body.name == "Player":
+		PlayerInfo.change_health(-1)

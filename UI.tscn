@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Testing resources/healtu har.png" type="Texture" id=1]
+[ext_resource path="res://UI.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0.133333, 0.917647, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.85098, 0, 0, 1 )
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.0583496
+margin_right = -0.0583496
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Healthbar" type="ProgressBar" parent="."]
+margin_right = 300.0
+margin_bottom = 37.0
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+max_value = 9.0
+step = 1.0
+rounded = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="healthbarsprite" type="Sprite" parent="Healthbar"]
+position = Vector2( 150.211, 18.5 )
+scale = Vector2( 4.69593, 4.69593 )
+texture = ExtResource( 1 )

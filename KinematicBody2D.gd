@@ -11,6 +11,10 @@ func get_input():
 	if Input.is_action_just_pressed("shoot"):
 			shoot()
 
+func _process(delta):
+	if PlayerInfo.get_health() <= 0:
+		get_tree().reload_current_scene()
+		PlayerInfo.reset()
 
 func _physics_process(delta):
 	get_input()

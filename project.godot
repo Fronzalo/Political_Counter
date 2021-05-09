@@ -18,6 +18,10 @@ config/name="Political Counter"
 run/main_scene="res://Testing grounds.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+PlayerInfo="*res://playerinfo.gd"
+
 [input]
 
 ui_left={
