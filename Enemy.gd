@@ -4,11 +4,17 @@ var speed = 150
 var velocity 
 onready var player = get_parent().get_node("Player")
 var move = true
+var side
 
 var target = Vector2.ZERO
 
 func _ready():
 	add_to_group("enemies")
+	side = round(rand_range(1,2))
+	if side == 1:
+		side = "Left"
+	else:
+		side = "Right"
 
 
 
@@ -40,4 +46,7 @@ func _on_Pause_timeout():
 
 func _on_Area2D_body_entered(body):
 	if body.name == "Player":
-		PlayerInfo.change_health(-1)
+		if side == "Left":
+			PlayerInfo.change_health(-1)
+		else:
+			PlayerInfo.change_health(+1)

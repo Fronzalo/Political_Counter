@@ -20,7 +20,7 @@ position = Vector2( -0.0883827, -0.0883827 )
 scale = Vector2( 0.312228, 0.312228 )
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="BodyCollider" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="Arm" type="Area2D" parent="."]
@@ -38,3 +38,7 @@ shape = SubResource( 2 )
 
 [node name="Position2D" type="Position2D" parent="Arm/CollisionShape2D"]
 position = Vector2( 8.37472, -4.76837e-07 )
+
+[node name="ReloadTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]

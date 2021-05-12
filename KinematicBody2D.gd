@@ -12,7 +12,7 @@ func get_input():
 			shoot()
 
 func _process(delta):
-	if PlayerInfo.get_health() <= 0:
+	if PlayerInfo.get_health() <= 0 or PlayerInfo.get_health() >= 9:
 		get_tree().reload_current_scene()
 		PlayerInfo.reset()
 
@@ -21,7 +21,17 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity)
 
 func shoot():
-	var b = bullet.instance()
-	owner.add_child(b)
-	b.transform = $Arm/CollisionShape2D/Position2D.global_transform
-	
+	if PlayerInfo.current_shots >= 1:
+		var b = bullet.instance()
+		owner.add_child(b)
+		b.transform = $Arm/CollisionShape2D/Position2D.global_transform
+		PlayerInfo.change_shots(-1)
+		$ReloadTimer.start()
+
+
+func _on_ReloadTimer_timeout():
+	for i in range(10):
+		PlayerInfo.change_shots(+0.1)
+
+func _ready():
+	$Arm/CollisionShape2D.disabled = true

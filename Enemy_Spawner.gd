@@ -7,9 +7,11 @@ func _process(delta):
 	if can_spawn == true:
 		y_spawn = round(rand_range(0,600))
 		var e = enemy.instance()
-		owner.add_child(e)
-		e.position.x = -50
+		e.position.x = position.x
 		e.position.y = y_spawn
+		owner.add_child(e)
+		
+		
 		can_spawn = false
 		$Timer.start()
 		
