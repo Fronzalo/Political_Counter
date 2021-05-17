@@ -7,3 +7,4 @@ func _ready():
 func _process(delta):
 	$Healthbar.value = PlayerInfo.get_health()
 	$Reload.value = PlayerInfo.get_shots()
+	$Score_Counter.text = "SCORE: " + str(PlayerInfo.get_score())

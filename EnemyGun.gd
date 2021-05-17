@@ -1,5 +1,6 @@
 extends Area2D
 
+onready var player = get_node("/root/World/Player")
 export (int) var speed = 200
 
 var velocity = Vector2()
@@ -7,8 +8,7 @@ var pos_x = position.x
 var neg_x = -position.x
 
 func get_input():
-
-	var look_vec = get_global_mouse_position() - global_position
+	var look_vec = player.position - global_position
 	global_rotation = atan2(look_vec.y, look_vec.x)
 	#print(look_vec)
 	if look_vec.x <= 0:

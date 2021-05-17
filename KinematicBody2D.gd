@@ -30,8 +30,24 @@ func shoot():
 
 
 func _on_ReloadTimer_timeout():
-	for i in range(10):
 		PlayerInfo.change_shots(+0.1)
 
 func _ready():
+	add_to_group("player")
 	$Arm/CollisionShape2D.disabled = true
+
+
+func _on_HitBox_area_entered(area):
+	if area.is_in_group("projectiles"):
+		if area.side == "Left":
+			PlayerInfo.change_health(-1)
+		else:
+			PlayerInfo.change_health(+1)
+		area.queue_free()
+		
+	if area.is_in_group("enemies"):
+		if area.side == "Left":
+			PlayerInfo.change_health(-1)
+		else:
+			PlayerInfo.change_health(+1)
+		

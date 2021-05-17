@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemy_Spawner.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 622.889, 61.8183 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 44.821, 348.417 )
 
 [node name="World" type="Node"]
 
@@ -10,9 +16,27 @@
 position = Vector2( 487.216, 285.656 )
 
 [node name="Enemy_Spawner2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1112.36, -1.12247 )
+position = Vector2( 1041.72, 121.318 )
 
 [node name="Enemy_Spawner" parent="." instance=ExtResource( 2 )]
-position = Vector2( -93.103, 0 )
+position = Vector2( -17.4223, 121.318 )
 
 [node name="UI" parent="." instance=ExtResource( 3 )]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 517.262, 644.127 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 517.262, 54 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 1106.55, 345.656 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -64.9471, 345.656 )
+shape = SubResource( 2 )
