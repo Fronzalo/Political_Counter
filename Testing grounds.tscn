@@ -1,42 +1,58 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemy_Spawner.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI.tscn" type="PackedScene" id=3]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 622.889, 61.8183 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 44.821, 348.417 )
+[ext_resource path="res://Testing resources/background.png" type="Texture" id=4]
+[ext_resource path="res://Testing resources/background2.png" type="Texture" id=5]
+[ext_resource path="res://Testing resources/lamppost.png" type="Texture" id=6]
 
 [node name="World" type="Node"]
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 487.216, 285.656 )
-
 [node name="Enemy_Spawner2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1041.72, 121.318 )
+position = Vector2( 975.674, 291 )
 
 [node name="Enemy_Spawner" parent="." instance=ExtResource( 2 )]
-position = Vector2( -17.4223, 121.318 )
+position = Vector2( 48.2659, 292 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 512.382, 299.017 )
+scale = Vector2( 1.1368, 1.20393 )
+texture = ExtResource( 4 )
+
+[node name="Border" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Border"]
+polygon = PoolVector2Array( 599.253, -3.89801, 877.696, 293.422, 1025.88, 291.535, 1025.88, -2.01027 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Border"]
+polygon = PoolVector2Array( 509.585, 291.535, 512.417, 185.821, 385.938, -2.95415, 0.837097, -0.122513, 0.837097, 290.591 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Border"]
+position = Vector2( -0.117111, 0 )
+polygon = PoolVector2Array( -18.6601, 288.028, -17.2459, 603.397, 1046.24, 601.983, 1044.83, 290.856, 1075.94, 290.856, 1074.53, 648.652, -38.4591, 648.652, -39.8733, 286.614 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Border"]
+polygon = PoolVector2Array( 383.307, -4.75909, 600.398, -3.81522, 601.342, -27.4121, 382.363, -27.4121 )
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Border"]
+polygon = PoolVector2Array( 517.622, 325.71, 515.105, 322.531, 514.841, 311.407, 517.489, 310.877, 517.079, 266.064, 519.599, 266.379, 519.52, 255.197, 523.3, 255.512, 527.316, 255.355, 530.44, 255.58, 530.151, 266.222, 532.777, 266.33, 532.9, 283.553, 532.851, 310.877, 535.368, 311.274, 533.911, 325.577 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 695.28, 334.694 )
+scale = Vector2( 4, 4 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 372.236, 101.615 )
+scale = Vector2( 1.13495, 1.17705 )
+texture = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="Sprite2"]
+position = Vector2( 142.576, 74.6212 )
+texture = ExtResource( 6 )
 
 [node name="UI" parent="." instance=ExtResource( 3 )]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 517.262, 644.127 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 517.262, 54 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 1106.55, 345.656 )
-shape = SubResource( 2 )
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -64.9471, 345.656 )
-shape = SubResource( 2 )
+margin_left = 52.563
+margin_right = 52.563

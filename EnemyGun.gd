@@ -13,11 +13,13 @@ func get_input():
 	#print(look_vec)
 	if look_vec.x <= 0:
 		get_parent().get_node("Sprite").flip_h=true
+		$Sprite.flip_v = true
 		position.x = neg_x
 		
 	else:
 		get_parent().get_node("Sprite").flip_h=false
 		position.x = pos_x
+		$Sprite.flip_v = false
 
 func _physics_process(delta):
 	get_input()

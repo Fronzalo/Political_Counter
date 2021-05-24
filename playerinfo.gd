@@ -4,6 +4,9 @@ var health
 var health_max
 var max_shots = 9
 var current_shots = 9
+var current_charges = 3
+var max_charges
+
 var lives
 var lives_max
 var score
@@ -12,6 +15,8 @@ func _ready():
 	health = 5
 	health_max = 9
 	max_shots = 9
+	max_charges = 3
+	current_charges = 3
 	current_shots = 9
 	score = 0
 
@@ -26,6 +31,13 @@ func change_shots(amount):
 		
 func change_score(amount):
 	score += amount
+
+func change_charge(amount):
+	current_charges += amount
+	current_charges = clamp(current_charges,0, max_charges)
+
+func get_charges():
+	return current_charges
 
 func get_health():
 	return health

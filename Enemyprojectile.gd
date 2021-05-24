@@ -17,3 +17,10 @@ func _physics_process(delta):
 
 
 
+
+
+
+
+func _on_Enemyprojectile_body_entered(body):
+	if body.name == "Border":
+		queue_free()

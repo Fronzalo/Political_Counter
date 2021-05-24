@@ -30,7 +30,6 @@ func _physics_process(delta):
 func shoot():
 		var e = bullet.instance()
 		get_parent().add_child(e)
-		print("shooting")
 		e.transform = $Gun/CollisionShape2D/Position2D.global_transform
 		e.side = get_side()
 		shoot = false 
