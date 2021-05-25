@@ -1,6 +1,7 @@
 extends KinematicBody2D
 export (int) var speed = 200
 var velocity = Vector2()
+onready var chargetimer = false
 onready var m = 0
 var bullet = preload("res://projectile.tscn")
 var chargeshot = preload("res://chargeshot.tscn")
@@ -10,11 +11,27 @@ func get_input():
 	velocity.y = Input.get_action_strength("down") - Input.get_action_strength("up")
 	velocity = velocity.normalized() * speed
 
-
 	if Input.is_action_just_pressed("shoot"):
+		$chargetimer.start()
+	if Input.is_action_just_released("shoot"):
+		if chargetimer == true:
+			charge_shoot()
+			$chargetimer.stop()
+			chargetimer = false
+		else:
 			shoot()
-	if Input.is_action_just_pressed("alt_fire"):
-		charge_shoot()
+			$chargetimer.stop()
+			chargetimer = false
+#	if Input.is_action_just_pressed("shoot"):
+#			shoot()
+#	if Input.is_action_just_pressed("alt_fire"):
+#		charge_shoot()
+
+
+func _on_chargetimer_timeout():
+	chargetimer = true
+	print("Charged!")
+
 
 func _process(delta):
 	if PlayerInfo.get_health() <= 0 or PlayerInfo.get_health() >= 9:
@@ -83,3 +100,6 @@ func _on_HitBox_area_entered(area):
 func _on_Chargereload_timeout():
 	PlayerInfo.change_charge(+1)
 	$Chargereload.start()
+
+
+

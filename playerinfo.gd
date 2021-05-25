@@ -10,6 +10,7 @@ var max_charges
 var lives
 var lives_max
 var score
+var highscore
 
 func _ready():
 	health = 5
@@ -19,6 +20,7 @@ func _ready():
 	current_charges = 3
 	current_shots = 9
 	score = 0
+	highscore = 0
 
 
 func change_health(amount):
@@ -48,7 +50,15 @@ func get_shots():
 func get_score():
 	return score
 
+func get_high():
+	return highscore
+
 func reset():
 	current_shots = 9
 	health = 5
+	if highscore <= score:
+		highscore = score
+	else:
+		highscore = highscore
+
 	score = 0
