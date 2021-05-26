@@ -18,11 +18,11 @@ bg_color = Color( 0.133333, 0.909804, 0, 1 )
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=5]
 size = 36
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 size = 50
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
@@ -72,14 +72,14 @@ margin_left = 705.0
 margin_top = 54.0
 margin_right = 1009.0
 margin_bottom = 118.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 text = "HIGHSCORE:"
 
 [node name="Score_Counter" type="Label" parent="."]
 margin_left = 705.0
 margin_right = 1009.0
 margin_bottom = 52.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "SCORE: "
 __meta__ = {
 "_edit_use_anchors_": false

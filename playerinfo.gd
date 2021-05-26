@@ -6,7 +6,8 @@ var max_shots = 9
 var current_shots = 9
 var current_charges = 3
 var max_charges
-
+var libkill 
+var repkill
 var lives
 var lives_max
 var score
@@ -21,6 +22,20 @@ func _ready():
 	current_shots = 9
 	score = 0
 	highscore = 0
+	libkill = 0
+	repkill = 0
+
+func liberal_killed(amount):
+	libkill += amount
+
+func liberals_killed():
+	return libkill
+
+func republican_killed(amount):
+	repkill += amount
+
+func republicans_killed():
+	return repkill
 
 
 func change_health(amount):
@@ -56,6 +71,8 @@ func get_high():
 func reset():
 	current_shots = 9
 	health = 5
+	libkill = 0
+	repkill = 0
 	if highscore <= score:
 		highscore = score
 	else:

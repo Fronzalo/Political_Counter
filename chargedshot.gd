@@ -31,7 +31,15 @@ func _on_Area2D_body_entered(body):
 func _on_Explosion_body_entered(body):
 	if body.is_in_group("enemies"):
 		if body.name == "Enemy":
+			if body.side == "Left":
+				PlayerInfo.liberal_killed(1)
+			else:
+				PlayerInfo.republican_killed(1)
 			PlayerInfo.change_score(200)
 		if body.name == "Shooter":
+			if body.side == "Left":
+				PlayerInfo.liberal_killed(1)
+			else:
+				PlayerInfo.republican_killed(1)
 			PlayerInfo.change_score(350)
 		body.queue_free()
