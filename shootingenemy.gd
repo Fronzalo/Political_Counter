@@ -39,7 +39,7 @@ func get_side():
 	return side
 
 func _on_Go_timeout():
-	print("go")
+#	print("go")
 	move = true
 	movex = rand_range(-20,20)
 	movey = rand_range(-200,200)
@@ -47,7 +47,7 @@ func _on_Go_timeout():
 	$Pause.start()
 
 func _on_Pause_timeout():
-	print("pause")
+#	print("pause")
 	move = false
 	$Go.wait_time = rand_range(3,6)
 	$Go.start()
