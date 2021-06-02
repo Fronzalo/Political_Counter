@@ -10,7 +10,8 @@ var behaviour
 var movex 
 var movey
 var attacking
-
+var missles_shot = 0
+var fire_missile = false
 func _physics_process(delta):
 #	velocity = position.direction_to(player.position) * speed
 #	velocity = target * speed
@@ -32,6 +33,7 @@ func _physics_process(delta):
 		if behaviour == 3:
 			attacking == true
 			$Attack_Timer.wait_time = rand_range(2,4)
+			$Attack_Timer.start()
 			if attacking == false:
 				missile()
 			else:
@@ -46,6 +48,8 @@ func _physics_process(delta):
 func missile():
 	attacking = true 
 	behaviour = 0
+	$Go.stop()
+	$Pause.stop()
 	$Walk.hide()
 	$Missile.show()
 	$AnimationPlayer.play("missile open")
@@ -54,14 +58,26 @@ func missile():
 	$Attack_Timer.start()
 	if attacking == true:
 		$AnimationPlayer.play("missile")
-		print("IM FIRING MY MISSILES")
+
+		var max_missiles = round(rand_range(5,9))
+		if missles_shot <= max_missiles:
+			$missle_timer.start()
+			if fire_missile == true:
+				missileshoot()
+				#this code dosent work yet...
 	else: 
 		print("IVE STOPPED FIRING MY MISSILES")
 		$AnimationPlayer.play("missle close")
 		yield($AnimationPlayer,"animation_finished")
 		$Missile.hide()
 		$Pause.start()
+		missles_shot = 0
 
+func missileshoot():
+	print("trump shot a missile")
+	attacking == false
+	missles_shot += 1
+ 
 func lazer():
 	attacking = true
 	$Go.stop()
@@ -89,7 +105,7 @@ func _on_Go_timeout():
 	move = true
 	print("go")
 	$Pause.wait_time = rand_range(3,6)
-	behaviour = round(rand_range(1,3))
+	behaviour = 3 #round(rand_range(1,3))
 	print(behaviour)
 	$Pause.start()
 	$Idle.hide()
@@ -118,3 +134,7 @@ func _on_Pause_timeout():
 
 func _on_Attack_Timer_timeout():
 	attacking = false
+
+
+func _on_missle_timer_timeout():
+	fire_missile = true

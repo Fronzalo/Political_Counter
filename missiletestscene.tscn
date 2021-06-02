@@ -5,16 +5,31 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="trump_missile" parent="." instance=ExtResource( 1 )]
-position = Vector2( 157.656, 537.629 )
+position = Vector2( 145.916, 300.83 )
 
 [node name="trump_missile2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 147.656, 157.059 )
+position = Vector2( 145.916, 300.83 )
 
 [node name="trump_missile3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 879.841, 527.629 )
+position = Vector2( 145.916, 300.83 )
 
 [node name="trump_missile4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 349.44, 249.954 )
+position = Vector2( 145.916, 300.83 )
 
 [node name="trump_missile5" parent="." instance=ExtResource( 1 )]
-position = Vector2( 649.101, 327.866 )
+position = Vector2( 145.916, 300.83 )
+
+[node name="trump_missile6" parent="." instance=ExtResource( 1 )]
+position = Vector2( 145.916, 300.83 )
+
+[node name="trump_missile7" parent="." instance=ExtResource( 1 )]
+position = Vector2( 145.916, 300.83 )
+
+[node name="trump_missile8" parent="." instance=ExtResource( 1 )]
+position = Vector2( 145.916, 300.83 )
+
+[node name="trump_missile9" parent="." instance=ExtResource( 1 )]
+position = Vector2( 145.916, 300.83 )
+
+[node name="trump_missile10" parent="." instance=ExtResource( 1 )]
+position = Vector2( 145.916, 300.83 )

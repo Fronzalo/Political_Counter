@@ -96,7 +96,7 @@ script = ExtResource( 1 )
 "anims/lazer flash" = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 1, 0.931695, 0.931695, 1 )
+modulate = Color( 1, 0.290717, 0.290717, 1 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
 centered = false
