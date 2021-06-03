@@ -10,8 +10,10 @@ var behaviour
 var movex 
 var movey
 var attacking
-var missles_shot = 0
+onready var missles_shot = 0
 var fire_missile = false
+onready var max_missiles = 0
+onready var tmissile = preload("res://trump_missile.tscn")
 func _physics_process(delta):
 #	velocity = position.direction_to(player.position) * speed
 #	velocity = target * speed
@@ -31,7 +33,7 @@ func _physics_process(delta):
 				$Pause.start()
 			
 		if behaviour == 3:
-			attacking == true
+			#attacking == true
 			$Attack_Timer.wait_time = rand_range(2,4)
 			$Attack_Timer.start()
 			if attacking == false:
@@ -54,28 +56,16 @@ func missile():
 	$Missile.show()
 	$AnimationPlayer.play("missile open")
 	yield($AnimationPlayer,"animation_finished")
-	$Attack_Timer.wait_time = 6
-	$Attack_Timer.start()
-	if attacking == true:
-		$AnimationPlayer.play("missile")
-
-		var max_missiles = round(rand_range(5,9))
-		if missles_shot <= max_missiles:
-			$missle_timer.start()
-			if fire_missile == true:
-				missileshoot()
-				#this code dosent work yet...
-	else: 
-		print("IVE STOPPED FIRING MY MISSILES")
-		$AnimationPlayer.play("missle close")
-		yield($AnimationPlayer,"animation_finished")
-		$Missile.hide()
-		$Pause.start()
-		missles_shot = 0
+	$AnimationPlayer.play("missile")
+	max_missiles = round(rand_range(5,9))
+	$missle_timer.start()
 
 func missileshoot():
-	print("trump shot a missile")
-	attacking == false
+	var e = tmissile.instance()
+	get_parent().add_child(e)
+	e.transform = $Missile_Position.global_transform
+	e.position.x += (rand_range(-10,10))
+	
 	missles_shot += 1
  
 func lazer():
@@ -93,19 +83,24 @@ func lazer():
 	$Attack_Timer.start()
 	if attacking == true:
 		$AnimationPlayer.play("lazer")
-		print("IM FIRING MY LAZER BEAM")
+		$Lazer_Position.show()
+		$Lazer_Position/Lazer/RayCast2D.set_enabled(true)
 	else: 
 		print("IVE STOPPED FIRING MY LAZER BEAM")
+		$Lazer_Position.hide()
+		$Lazer_Position/Lazer/RayCast2D.set_enabled(false)
 		$AnimationPlayer.play("lazer close")
 		yield($AnimationPlayer,"animation_finished")
 		$Lazer.hide()
+		$Idle.show()
+		$AnimationPlayer.play("Idle")
 		$Pause.start()
 
 func _on_Go_timeout():
 	move = true
 	print("go")
 	$Pause.wait_time = rand_range(3,6)
-	behaviour = 3 #round(rand_range(1,3))
+	behaviour = round(rand_range(1,3))
 	print(behaviour)
 	$Pause.start()
 	$Idle.hide()
@@ -137,4 +132,16 @@ func _on_Attack_Timer_timeout():
 
 
 func _on_missle_timer_timeout():
-	fire_missile = true
+	if missles_shot <= max_missiles:
+		missileshoot()
+			#this code dosent work yet...
+	else:
+		print("IVE STOPPED FIRING MY MISSILES")
+		$AnimationPlayer.play("missle close")
+		yield($AnimationPlayer,"animation_finished")
+		$Missile.hide()
+		$Pause.start()
+		$Idle.show()
+		missles_shot = 0
+		$missle_timer.stop()
+

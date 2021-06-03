@@ -11,5 +11,5 @@ func _physics_process(delta):
 	if raycast2d.is_colliding():
 		end.global_position = raycast2d.get_collision_point()
 	else:
-		end.global_position = raycast2d.cast_to * 10
-	beam.region_rect.end.x = end.position.length()
+		end.global_position = raycast2d.cast_to
+	beam.region_rect.end.x = end.position.length()*10
