@@ -17,8 +17,7 @@ func _ready():
 	size = get_viewport().get_visible_rect().size
 	$Explosion.hide()
 	$Rocket.show()
-	target = Vector2(position.x, position.y-1000)
-	look_at(target)
+#	target = Vector2.UP
 
 var velocity = Vector2()
 

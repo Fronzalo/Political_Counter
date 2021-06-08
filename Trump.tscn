@@ -8,11 +8,11 @@
 [ext_resource path="res://Trump.gd" type="Script" id=6]
 [ext_resource path="res://Lazer.tscn" type="PackedScene" id=7]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 58.0668, 10 )
-
 [sub_resource type="CircleShape2D" id=2]
 radius = 49.5812
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 58.0668, 10 )
 
 [sub_resource type="Animation" id=3]
 loop = true
@@ -138,13 +138,13 @@ script = ExtResource( 6 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, 62.6975 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="hitbox" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 6.00677, -10.345 )
 shape = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 62.6975 )
+shape = SubResource( 1 )
 
 [node name="Trump" type="Sprite" parent="."]
 visible = false
@@ -167,14 +167,11 @@ visible = false
 texture = ExtResource( 4 )
 hframes = 4
 vframes = 5
-frame = 9
 
 [node name="Lazer" type="Sprite" parent="."]
-visible = false
 texture = ExtResource( 5 )
 hframes = 3
 vframes = 3
-frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 3 )
@@ -208,8 +205,13 @@ position = Vector2( -54.8272, -30.7244 )
 [node name="missle_timer" type="Timer" parent="."]
 wait_time = 0.25
 
+[node name="Lazer_Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="Pause" to="." method="_on_Pause_timeout"]
 [connection signal="timeout" from="Go" to="." method="_on_Go_timeout"]
 [connection signal="timeout" from="Attack_Timer" to="." method="_on_Attack_Timer_timeout"]
 [connection signal="timeout" from="missle_timer" to="." method="_on_missle_timer_timeout"]
+[connection signal="timeout" from="Lazer_Timer" to="." method="_on_Lazer_Timer_timeout"]
