@@ -25,18 +25,20 @@ func _physics_process(delta):
 	if fired == true:
 		position = position.move_toward(target,bullet_speed * delta)
 		if position.x == target.x and position.y == target.y:
-			bullet_speed = 0
-			target = Vector2(position.x+1000, position.y)
-			look_at(target)
-			$Rocket.hide()
-			$Explosion.show()
-			$AnimationPlayer.play("explosion")
-			yield($AnimationPlayer,"animation_finished")
-			queue_free()
+			explode()
 	else:
 		translate(Vector2.UP * bullet_speed * delta)
 		$AnimationPlayer.play("in the air")
 
+func explode():
+	bullet_speed = 0
+	target = Vector2(position.x+1000, position.y)
+	look_at(target)
+	$Rocket.hide()
+	$Explosion.show()
+	$AnimationPlayer.play("explosion")
+	yield($AnimationPlayer,"animation_finished")
+	queue_free()
 
 func _on_VisibilityNotifier2D_screen_exited():
 	print("##########################################################CHINA")
@@ -52,3 +54,9 @@ func _on_RocketFall_timeout():
 	look_at(target)
 	fired = true
 	
+
+
+
+func _on_trump_missile_body_entered(body):
+	if body.name == "Player":
+		explode()

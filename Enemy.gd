@@ -8,6 +8,8 @@ var side
 var s 
 
 var target = Vector2.ZERO
+var health = 3
+
 
 func _ready():
 	add_to_group("enemies")
@@ -29,7 +31,14 @@ func _physics_process(delta):
 	
 		
 func _process(delta):
-	pass
+	if health <= 0:
+		if side == "Left":
+			PlayerInfo.liberal_killed(1)
+		else:
+			PlayerInfo.republican_killed(1)
+		PlayerInfo.change_score(200)
+		PlayerInfo.boss_counter(200)
+		queue_free()
 
 func _on_Go_timeout():
 	move = true

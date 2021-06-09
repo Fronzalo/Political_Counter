@@ -12,9 +12,6 @@
 [node name="World" type="Node"]
 script = ExtResource( 8 )
 
-[node name="Enemy_Spawner2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 975.674, 291 )
-
 [node name="Enemy_Spawner" parent="." instance=ExtResource( 2 )]
 position = Vector2( 48.2659, 292 )
 

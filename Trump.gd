@@ -23,11 +23,14 @@ var attacking
 onready var missles_shot = 0
 var fire_missile = false
 onready var max_missiles = 0
-
+var health = 20
 
 
 
 									###     BEHAVIOUR CODE     ###							
+
+func _ready():
+	add_to_group("enemies")
 
 func _physics_process(delta):
 	if move == true:
@@ -60,6 +63,11 @@ func _physics_process(delta):
 
 	else:
 		pass
+	
+	if health <= 0:
+		PlayerInfo.change_score(+800)
+		#explode()
+		queue_free()
 
 
 func _on_Go_timeout():

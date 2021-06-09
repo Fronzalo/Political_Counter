@@ -12,6 +12,8 @@ var lives
 var lives_max
 var score
 var highscore
+var bosscount
+var bossspawn = 1000
 
 func _ready():
 	health = 5
@@ -24,6 +26,14 @@ func _ready():
 	highscore = 0
 	libkill = 0
 	repkill = 0
+	bosscount = 0
+
+func boss_counter(amount):
+	bosscount += amount
+	bosscount = clamp(bosscount,0,bossspawn)
+
+func bosspawn():
+	return bosscount
 
 func liberal_killed(amount):
 	libkill += amount

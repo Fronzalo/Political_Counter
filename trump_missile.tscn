@@ -113,5 +113,6 @@ one_shot = true
 anims/explosion = SubResource( 2 )
 "anims/in the air" = SubResource( 3 )
 
+[connection signal="body_entered" from="." to="." method="_on_trump_missile_body_entered"]
 [connection signal="timeout" from="RocketFall" to="." method="_on_RocketFall_timeout"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

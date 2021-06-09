@@ -11,6 +11,7 @@ var shoot
 var s 
 onready var bullet = preload("res://Enemyprojectile.tscn")
 var target = Vector2.ZERO
+var health = 2
 
 func _ready():
 	add_to_group("enemies")
@@ -19,7 +20,17 @@ func _ready():
 		side = "Left"
 	else:
 		side = "Right"
-
+func _process(delta):
+	if health <= 0:
+		if side == "Left":
+			PlayerInfo.liberal_killed(1)
+		else:
+			PlayerInfo.republican_killed(1)
+		PlayerInfo.change_score(350)
+		PlayerInfo.boss_counter(350)
+		queue_free()
+		
+		
 func _physics_process(delta):
 	if move == true:
 		target = Vector2(movex, movey).normalized()
