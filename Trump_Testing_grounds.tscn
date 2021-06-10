@@ -37,4 +37,3 @@ position = Vector2( 767.164, 372.617 )
 
 [node name="Trump" parent="." instance=ExtResource( 2 )]
 position = Vector2( 196.319, 212.416 )
-scale = Vector2( 3, 3 )

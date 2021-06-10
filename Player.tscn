@@ -197,6 +197,7 @@ position = Vector2( 0.364118, 10.5594 )
 shape = SubResource( 2 )
 
 [node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 0.1
 
 [node name="Run_animation" type="Sprite" parent="."]
 rotation = 3.14159

@@ -62,7 +62,7 @@ tracks/0/keys = {
 [sub_resource type="CircleShape2D" id=3]
 radius = 7.0
 
-[node name="Area2D" type="Area2D"]
+[node name="Explosion_Area" type="Area2D"]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 3 )
@@ -96,6 +96,11 @@ hframes = 4
 vframes = 4
 frame = 15
 
+[connection signal="area_entered" from="." to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="." to="." method="_on_Explosion_Area_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Explosion_Area_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_Explosion_Area_body_shape_entered"]
 [connection signal="body_shape_entered" from="." to="." method="_on_Area2D_body_shape_entered"]
+[connection signal="area_entered" from="Explosion" to="." method="_on_Explosion_area_entered"]
 [connection signal="body_entered" from="Explosion" to="." method="_on_Explosion_body_entered"]

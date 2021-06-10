@@ -24,7 +24,8 @@ onready var missles_shot = 0
 var fire_missile = false
 onready var max_missiles = 0
 var health = 20
-
+onready var misslepos = $Missile_Position.position.x
+onready var lazerpos = $Lazer_Position.position.x
 
 
 									###     BEHAVIOUR CODE     ###							
@@ -32,7 +33,31 @@ var health = 20
 func _ready():
 	add_to_group("enemies")
 
+func flip(face):
+	$Trump.flip_h = face
+	$Idle.flip_h = face
+	$Walk.flip_h = face
+	$Missile.flip_h = face
+	$Lazer.flip_h = face
+	if face == true:
+		$Missile_Position.position.x = -misslepos
+		$Lazer_Position.position.x = -lazerpos
+		$Lazer_Position/Lazer.position.x = -lazerpos
+	else:
+		$Missile_Position.position.x = misslepos
+		$Lazer_Position.position.x = lazerpos/3
+		$Lazer_Position/Lazer.position.x = lazerpos/3
+
+
+
 func _physics_process(delta):
+
+	if position.x > player.position.x:
+		flip(true)
+	else:
+		flip(false)
+
+
 	if move == true:
 
 		if behaviour == 1:
@@ -66,9 +91,21 @@ func _physics_process(delta):
 	
 	if health <= 0:
 		PlayerInfo.change_score(+800)
-		#explode()
-		queue_free()
+		explode()
 
+
+func explode():
+	speed = 0
+	$Go.stop()
+	$Pause.stop()
+	$Lazer.hide()
+	$Missile.hide()
+	$Trump.hide()
+	$Idle.show()
+	$Dead_explosion.show()
+	$AnimationPlayer.play("Death_Explosion")
+	yield($AnimationPlayer,"animation_finished")
+	queue_free()
 
 func _on_Go_timeout():
 	move = true

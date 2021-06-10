@@ -22,3 +22,9 @@ func _on_projectile_body_entered(body):
 		body.health -= 1
 	queue_free()
 	
+
+
+func _on_projectile_area_entered(area):
+	if area.is_in_group("enemies"):
+		area.health -= 1
+	queue_free()
