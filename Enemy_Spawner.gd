@@ -9,6 +9,7 @@ onready var size = get_viewport().get_visible_rect().size
 var left 
 var bosstype
 
+
 func _process(delta):
 	if can_spawn == true:
 		

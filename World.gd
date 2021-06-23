@@ -16,4 +16,3 @@ func _process(delta):
 		get_tree().paused = true
 		$"Pause Screen".visible = true
 
-		

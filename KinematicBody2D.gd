@@ -5,6 +5,7 @@ onready var chargetimer = false
 onready var m = 0
 var bullet = preload("res://projectile.tscn")
 var chargeshot = preload("res://chargeshot.tscn")
+
 func get_input():
 	velocity = Vector2()
 	velocity.x = Input.get_action_strength("right") - Input.get_action_strength("left")

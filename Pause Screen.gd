@@ -33,5 +33,7 @@ func _on_quit_pressed():
 
 
 func _on_reset_pressed():
+		yield(get_tree(),"idle_frame")
+		get_tree().paused = false
 		get_tree().reload_current_scene()
 		PlayerInfo.reset()

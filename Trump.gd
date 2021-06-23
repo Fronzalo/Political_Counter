@@ -4,7 +4,7 @@ extends KinematicBody2D
 
 onready var tmissile = preload("res://trump_missile.tscn")
 onready var player = get_parent().get_node("Player")
-
+onready var spawner = get_parent().get_node("Enemy_Spawner")
 
 
 									###  VARIBLES   ###											
@@ -42,10 +42,10 @@ func flip(face):
 	if face == true:
 		$Missile_Position.position.x = -misslepos
 		$Lazer_Position.position.x = -lazerpos
-		$Lazer_Position/Lazer.position.x = -lazerpos
+		$Lazer_Position/Lazer.position.x = -lazerpos/3
 	else:
 		$Missile_Position.position.x = misslepos
-		$Lazer_Position.position.x = lazerpos/3
+		$Lazer_Position.position.x = lazerpos
 		$Lazer_Position/Lazer.position.x = lazerpos/3
 
 
@@ -94,6 +94,7 @@ func _physics_process(delta):
 		explode()
 
 
+
 func explode():
 	speed = 0
 	$Go.stop()
@@ -101,7 +102,6 @@ func explode():
 	$Lazer.hide()
 	$Missile.hide()
 	$Trump.hide()
-	$Idle.show()
 	$Dead_explosion.show()
 	$AnimationPlayer.play("Death_Explosion")
 	yield($AnimationPlayer,"animation_finished")
