@@ -53,3 +53,5 @@ position = Vector2( -85, -17.911 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/cock = SubResource( 1 )
 anims/idle = SubResource( 2 )
+
+[node name="Fire" type="AudioStreamPlayer2D" parent="."]

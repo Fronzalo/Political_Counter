@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Winchester12-RA_The_Sun_God-1722751268.ogg-fdd998f3dcee635bd5419bf8c419c062.oggstr"
+
+[deps]
+
+source_file="res://Testing resources/Winchester12-RA_The_Sun_God-1722751268.ogg"
+dest_files=[ "res://.import/Winchester12-RA_The_Sun_God-1722751268.ogg-fdd998f3dcee635bd5419bf8c419c062.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -12,9 +12,15 @@ var started = false
 var moving 
 var body
 var hit
+var firing = false
 var lazering
 var spawn
+var sg_target_x = 0
+var sg_target_y = 0
+var pellets
 var spawn_number
+var clip
+var clip_fired = 0
 onready var bullet = preload("res://Enemyprojectile.tscn")
 var enemy = preload("res://Enemy.tscn")
 var shootingenemy = preload("res://Shootingenemy.tscn")
@@ -25,6 +31,7 @@ func _ready():
 	$Shotgun.hide()
 	$Position2D.hide()
 	$"Lazer texture".hide()
+	$AnimationPlayer.play("Idle")
 
 func _physics_process(delta):
 	if started == false:
@@ -44,11 +51,23 @@ func _physics_process(delta):
 			position = position.move_toward(target,delta * speed)
 			if position == target and spawn == 1:
 				biden_spawn_phase()
+		elif moving == 4:
+			target = player.position
+			target.x += sg_target_x
+			target.y += sg_target_y
+			position = position.move_toward(target,delta * speed)
 		else:
 				target.x = size.x/2
 				target.y = size.y/2
 				position = position.move_toward(target,speed * delta)
-
+	if firing == true:
+		if clip_fired != clip:
+			shoot()
+			clip_fired += 1
+		else:
+			$Shotgun_Timer.stop()
+			$Position2D.hide()
+			$Go.start()
 
 
 
@@ -83,15 +102,19 @@ func _on_Go_timeout():
 		moving = 3
 		spawn = 1
 	elif movement == 6:
+		clip = round(rand_range(3,7))
+		clip_fired = 0
+		$Go.stop()
 		$Biden.hide()
 		$Shotgun.show()
 		$AnimationPlayer.play("shotgun")
 		yield($AnimationPlayer,"animation_finished")
 		$Shotgun.hide()
 		$Biden.show()
+		$AnimationPlayer.play("Idle")
 		$Position2D.show()
-		
-		moving = 3
+		$Shotgun_Timer.start()
+		moving = 4
 		$side_timer.start()
 		
 
@@ -154,3 +177,42 @@ func _on_when_spawn_timeout():
 	moving = 0
 	movement = 0
 	$Go.start()
+
+func shoot():
+	print(pellets)
+	for _i in range(pellets):
+		var e = bullet.instance()
+		get_parent().add_child(e)
+		e.transform = $Position2D/Sprite/Bullet_Point.global_transform
+		e.rotation_degrees += rand_range(-25,25)
+		e.scale.y += 2
+		e.scale.x += 2 
+		print(e.rotation_degrees)
+		e.side = "left"
+	firing = false
+
+
+
+func _on_Shotgun_Timer_timeout():
+	pellets = floor(rand_range(3,6))
+	firing = true
+	if $Biden.flip_h == true:
+		$Lazer_animation.play("shoot_reversed")
+	else:
+		$Lazer_animation.play("shoot")
+	yield($Lazer_animation,"animation_finished")
+
+
+func _on_side_timer_timeout():
+	sg_target_x = floor(rand_range(0,2))
+	if sg_target_x == 0:
+		sg_target_x = -1*(rand_range(1,3)*200)
+	else:
+		sg_target_x = rand_range(1,3)*300
+	
+	sg_target_y = floor(rand_range(0,2))
+	if sg_target_y == 0:
+		sg_target_y = -1*(rand_range(1,3)*200)
+	else:
+		sg_target_y = rand_range(1,3)*300
+	

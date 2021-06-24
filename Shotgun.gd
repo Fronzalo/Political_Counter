@@ -26,5 +26,6 @@ func get_input():
 		position.x = pos_x
 		$Sprite.flip_v = false
 
+
 func _physics_process(delta):
 	get_input()
