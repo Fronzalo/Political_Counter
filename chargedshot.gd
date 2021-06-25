@@ -27,10 +27,10 @@ func _on_Explosion_Area_body_entered(body):
 
 
 
-
 func _on_Explosion_body_entered(body):
 	if body.is_in_group("enemies"):
 		body.health -= 4
+
 
 
 

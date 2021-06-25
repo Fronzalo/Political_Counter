@@ -20,6 +20,8 @@ func _physics_process(delta):
 func _on_projectile_body_entered(body):
 	if body.is_in_group("enemies"):
 		body.health -= 1
+		print(body.health)
+		yield(get_tree(),"idle_frame")
 	queue_free()
 	
 
@@ -27,4 +29,10 @@ func _on_projectile_body_entered(body):
 func _on_projectile_area_entered(area):
 	if area.is_in_group("enemies"):
 		area.health -= 1
+		print(area.health)
+		yield(get_tree(),"idle_frame")
+	print(area.name)
+	if area.name == "hitbox":
+		area.get_parent().health -= 1
+		print(area.get_parent().health)
 	queue_free()

@@ -21,17 +21,22 @@ var pellets
 var spawn_number
 var clip
 var clip_fired = 0
+var health = 5 #20
 onready var bullet = preload("res://Enemyprojectile.tscn")
 var enemy = preload("res://Enemy.tscn")
 var shootingenemy = preload("res://Shootingenemy.tscn")
 var bs = 0
 func _ready():
+	add_to_group("enemies")
 	size = get_viewport().get_visible_rect().size
 	side = "left"
 	$Shotgun.hide()
 	$Position2D.hide()
 	$"Lazer texture".hide()
 	$AnimationPlayer.play("Idle")
+
+func change_health(amount):
+	health =- amount
 
 func _physics_process(delta):
 	if started == false:
@@ -61,13 +66,25 @@ func _physics_process(delta):
 				target.y = size.y/2
 				position = position.move_toward(target,speed * delta)
 	if firing == true:
-		if clip_fired != clip:
+		if clip_fired < clip:
 			shoot()
 			clip_fired += 1
 		else:
 			$Shotgun_Timer.stop()
 			$Position2D.hide()
+			$Biden.hide()
+			$Holster.show()
+			$AnimationPlayer.play("holster")
+			yield($AnimationPlayer, "animation_finished")
+			$Holster.hide()
+			$Biden.show()
+			firing = false
 			$Go.start()
+	if health <= 0:
+		PlayerInfo.change_score(+800)
+		#explode()
+		queue_free()
+
 
 
 
@@ -208,11 +225,11 @@ func _on_side_timer_timeout():
 	if sg_target_x == 0:
 		sg_target_x = -1*(rand_range(1,3)*200)
 	else:
-		sg_target_x = rand_range(1,3)*300
+		sg_target_x = rand_range(1,3)*200
 	
 	sg_target_y = floor(rand_range(0,2))
 	if sg_target_y == 0:
 		sg_target_y = -1*(rand_range(1,3)*200)
 	else:
-		sg_target_y = rand_range(1,3)*300
+		sg_target_y = rand_range(1,3)*200
 	

@@ -277,12 +277,12 @@ position = Vector2( 37.8758, 27.546 )
 [node name="Missile_Position" type="Position2D" parent="."]
 position = Vector2( -54.8272, -30.7244 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="hitbox" type="Area2D" parent="."]
 visible = false
 collision_layer = 2
 collision_mask = 2
 
-[node name="hitbox" type="CollisionShape2D" parent="Area2D"]
+[node name="hitbox" type="CollisionShape2D" parent="hitbox"]
 position = Vector2( 6.00677, -10.345 )
 shape = SubResource( 11 )
 
@@ -294,6 +294,7 @@ wait_time = 4.0
 one_shot = true
 
 [node name="Dead_explosion" type="Position2D" parent="."]
+visible = false
 
 [node name="Explosion" type="Sprite" parent="Dead_explosion"]
 position = Vector2( -37.6667, -42.6667 )
@@ -337,6 +338,6 @@ frame = 3
 [connection signal="timeout" from="Pause" to="." method="_on_Pause_timeout"]
 [connection signal="timeout" from="Go" to="." method="_on_Go_timeout"]
 [connection signal="timeout" from="Attack_Timer" to="." method="_on_Attack_Timer_timeout"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="missle_timer" to="." method="_on_missle_timer_timeout"]
 [connection signal="timeout" from="Lazer_Timer" to="." method="_on_Lazer_Timer_timeout"]

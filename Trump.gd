@@ -15,6 +15,7 @@ var velocity
 var move = true
 var side
 var s 
+var size
 var target = Vector2.ZERO
 var behaviour
 var movex 
@@ -32,6 +33,7 @@ onready var lazerpos = $Lazer_Position.position.x
 
 func _ready():
 	add_to_group("enemies")
+	size = get_viewport().get_visible_rect().size
 
 func flip(face):
 	$Trump.flip_h = face
@@ -41,12 +43,14 @@ func flip(face):
 	$Lazer.flip_h = face
 	if face == true:
 		$Missile_Position.position.x = -misslepos
-		$Lazer_Position.position.x = -lazerpos
-		$Lazer_Position/Lazer.position.x = -lazerpos/3
+		$Lazer_Position.position.x = -lazerpos/3
+		$Lazer_Position/Lazer.position.x = -lazerpos
+		$Lazer_Position.scale.x = -1
 	else:
 		$Missile_Position.position.x = misslepos
-		$Lazer_Position.position.x = lazerpos
-		$Lazer_Position/Lazer.position.x = lazerpos/3
+		$Lazer_Position.position.x = lazerpos/3
+		$Lazer_Position/Lazer.position.x = lazerpos
+		$Lazer_Position.scale.x = 1
 
 
 
@@ -79,7 +83,11 @@ func _physics_process(delta):
 			$Attack_Timer.start()
 			if attacking == false:
 				missile()
-			else:
+			else: #makes trump not press against the wall
+				if movey <= global_position.y - movey or movey >= size.y + movey:
+					movey = clamp(movey, 50, size.y-50)
+				if movex <= global_position.x - movex or movex >= size.x + movex:
+					movex = clamp(movex, 100, size.x-100)
 				target = Vector2(movex, movey).normalized()
 				move_and_slide(target * speed)
 
@@ -100,6 +108,8 @@ func explode():
 	$Go.stop()
 	$Pause.stop()
 	$Lazer.hide()
+	$missle_timer.stop()
+	$Lazer_Timer.stop()
 	$Missile.hide()
 	$Trump.hide()
 	$Dead_explosion.show()
