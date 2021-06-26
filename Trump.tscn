@@ -294,7 +294,6 @@ wait_time = 4.0
 one_shot = true
 
 [node name="Dead_explosion" type="Position2D" parent="."]
-visible = false
 
 [node name="Explosion" type="Sprite" parent="Dead_explosion"]
 position = Vector2( -37.6667, -42.6667 )
@@ -302,7 +301,6 @@ scale = Vector2( 1.72917, 1.72917 )
 texture = ExtResource( 8 )
 hframes = 4
 vframes = 4
-frame = 14
 
 [node name="Explosion2" type="Sprite" parent="Dead_explosion"]
 position = Vector2( 32.227, 34.8937 )
@@ -310,7 +308,7 @@ scale = Vector2( 1.13209, 1.13209 )
 texture = ExtResource( 8 )
 hframes = 4
 vframes = 4
-frame = 13
+frame = 14
 
 [node name="Explosion3" type="Sprite" parent="Dead_explosion"]
 position = Vector2( -14.5498, 35.8333 )
@@ -318,7 +316,7 @@ scale = Vector2( 1.1599, 1.11979 )
 texture = ExtResource( 8 )
 hframes = 4
 vframes = 4
-frame = 11
+frame = 14
 
 [node name="Explosion4" type="Sprite" parent="Dead_explosion"]
 position = Vector2( 45.4379, -39.7712 )
@@ -326,14 +324,14 @@ scale = Vector2( 2.38868, 2.38868 )
 texture = ExtResource( 8 )
 hframes = 4
 vframes = 4
-frame = 10
+frame = 14
 
 [node name="Big_Explosion" type="Sprite" parent="Dead_explosion"]
 position = Vector2( 0, -10.345 )
 scale = Vector2( 5.36976, 5.36976 )
 texture = ExtResource( 9 )
 hframes = 18
-frame = 3
+frame = 5
 
 [connection signal="timeout" from="Pause" to="." method="_on_Pause_timeout"]
 [connection signal="timeout" from="Go" to="." method="_on_Go_timeout"]

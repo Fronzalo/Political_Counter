@@ -2,6 +2,7 @@ extends Position2D
 var enemy = preload("res://Enemy.tscn")
 var shootingenemy = preload("res://Shootingenemy.tscn")
 var trump = preload("res://Trump.tscn")
+var biden = preload("res://Biden.tscn")
 var can_spawn = true
 var y_spawn
 var what_spawn = enemy
@@ -24,11 +25,11 @@ func _process(delta):
 		can_spawn = false
 		$Timer.start()
 	if PlayerInfo.bosspawn() >= 1000:
-		bosstype = 1#round(rand_range(1,3))
+		bosstype = floor(rand_range(1,3))
 		if bosstype == 1:
 			trump()
 		else:
-			pass #biden()
+			biden()
 		PlayerInfo.boss_counter(-1500)
 			
 	
@@ -56,4 +57,12 @@ func trump():
 		t.position.x = global_position.x + size.x - 100
 	t.position.y = global_position.y + y_spawn
 	owner.add_child(t)
+	can_spawn = false
+
+func biden():
+	print("Biden has been spawned")
+	var b = biden.instance()
+	b.global_position.y = -200
+	b.global_position.x = round(rand_range(0, size.x))
+	owner.add_child(b)
 	can_spawn = false

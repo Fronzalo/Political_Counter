@@ -54,8 +54,10 @@ position = Vector2( 142.576, 74.6212 )
 texture = ExtResource( 6 )
 
 [node name="UI" parent="." instance=ExtResource( 3 )]
-margin_left = 52.563
-margin_right = 52.563
+margin_left = 0.563
+margin_top = -1.0
+margin_right = 0.562988
+margin_bottom = -1.0
 
 [node name="Pause Screen" parent="." instance=ExtResource( 7 )]
 visible = false

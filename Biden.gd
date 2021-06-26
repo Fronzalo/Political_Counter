@@ -34,6 +34,8 @@ func _ready():
 	$Position2D.hide()
 	$"Lazer texture".hide()
 	$AnimationPlayer.play("Idle")
+	$Biden.show()
+	print(position)
 
 func change_health(amount):
 	health =- amount
@@ -54,6 +56,7 @@ func _physics_process(delta):
 			position = position.move_toward(target,delta * speed)
 		elif moving == 3:
 			position = position.move_toward(target,delta * speed)
+			
 			if position == target and spawn == 1:
 				biden_spawn_phase()
 		elif moving == 4:
@@ -74,6 +77,7 @@ func _physics_process(delta):
 			$Position2D.hide()
 			$Biden.hide()
 			$Holster.show()
+			$Biden_Charged.hide()
 			$AnimationPlayer.play("holster")
 			yield($AnimationPlayer, "animation_finished")
 			$Holster.hide()
@@ -81,10 +85,21 @@ func _physics_process(delta):
 			firing = false
 			$Go.start()
 	if health <= 0:
-		PlayerInfo.change_score(+800)
-		#explode()
-		queue_free()
+		explode()
 
+func explode():
+	speed = 0
+	$Go.stop()
+	$Shotgun.hide()
+	$Lazertimer.stop()
+	$Biden_Charged.hide()
+	$Holster.hide()
+	$Biden.show()
+	$EXPLODE.show()
+	$Lazer_animation/AnimationPlayer.play("Explode")
+	yield($Lazer_animation/AnimationPlayer,"animation_finished")
+	PlayerInfo.change_score(+800)
+	queue_free()
 
 
 
@@ -114,6 +129,7 @@ func _on_Go_timeout():
 		lazer()
 	elif movement == 5:
 		$Go.stop()
+		$AnimationPlayer.play("Idle")
 		target.y = round(rand_range(300,500))
 		target.x = round(rand_range(0,size.x))
 		moving = 3
@@ -189,7 +205,7 @@ func _on_when_spawn_timeout():
 		var biden_spawn = bs.instance()
 		biden_spawn.position.x = global_position.x + round(rand_range(-50,50))
 		biden_spawn.position.y = global_position.y + round(rand_range(50,100))
-		owner.add_child(biden_spawn)
+		get_parent().add_child(biden_spawn)
 		biden_spawn.side = "left"
 	moving = 0
 	movement = 0

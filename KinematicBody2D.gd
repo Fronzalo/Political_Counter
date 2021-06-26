@@ -3,6 +3,8 @@ export (int) var speed = 200
 var velocity = Vector2()
 onready var chargetimer = false
 onready var m = 0
+var reload_amount
+var reload_time = 0.3
 var bullet = preload("res://projectile.tscn")
 var chargeshot = preload("res://chargeshot.tscn")
 
@@ -23,6 +25,21 @@ func get_input():
 			shoot()
 			$chargetimer.stop()
 			chargetimer = false
+	
+	if Input.is_action_just_pressed("Reload"):
+		$ReloadTimer.wait_time = 0.6
+		reload_amount = 0
+		$ReloadTimer.start()
+		$ReloadTimer/Reload_Time.start()
+		
+	
+	if Input.is_action_just_released("Reload"):
+		$ReloadTimer.stop()
+		$ReloadTimer/Reload_Time.stop()
+		reload_amount = 0
+		$ReloadTimer.wait_time = 0.3
+		
+		
 #	if Input.is_action_just_pressed("shoot"):
 #			shoot()
 #	if Input.is_action_just_pressed("alt_fire"):
@@ -58,12 +75,11 @@ func _physics_process(delta):
 			$AnimationPlayer.play("Idle")
 
 func shoot():
-	if PlayerInfo.current_shots >= 1:
+	if PlayerInfo.current_shots >= 1 and not Input.is_action_pressed("Reload"):
 		var b = bullet.instance()
 		owner.add_child(b)
 		b.transform = $ArmPosition/Arm/CollisionShape2D/Position2D.global_transform
 		PlayerInfo.change_shots(-1)
-		$ReloadTimer.start()
 
 func charge_shoot():
 	if PlayerInfo.current_charges >= 1:
@@ -73,9 +89,24 @@ func charge_shoot():
 		PlayerInfo.change_charge(-1)
 		$Chargereload.start()
 		
-		
-func _on_ReloadTimer_timeout():
+func _on_Reload_Time_timeout():
+	if reload_time == 0.3:
 		PlayerInfo.change_shots(+0.1)
+	elif reload_time >= 1 or reload_time <= 2:
+		PlayerInfo.change_shots(+0.2)
+	elif reload_time >= 0.6 or reload_time <= 1.5:
+		PlayerInfo.change_shots(+0.3)
+	else:
+		PlayerInfo.change_shots(+0.4)
+		
+	
+
+func _on_ReloadTimer_timeout():
+	if reload_time >= 0.5:
+		reload_time += -0.05
+		$ReloadTimer.wait_time = reload_time
+	else:
+		$ReloadTimer.wait_time = 0.05
 
 func _ready():
 	add_to_group("player")
@@ -101,6 +132,9 @@ func _on_HitBox_area_entered(area):
 func _on_Chargereload_timeout():
 	PlayerInfo.change_charge(+1)
 	$Chargereload.start()
+
+
+
 
 
 
