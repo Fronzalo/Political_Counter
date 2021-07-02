@@ -97,9 +97,11 @@ func _physics_process(delta):
 	else:
 		pass
 	
-	if health <= 0:
-		PlayerInfo.change_score(+800)
+	if health <= 0 and health >= -5:
+		health = -10
+	if health == -10:
 		explode()
+		health = -9
 
 
 
@@ -115,6 +117,7 @@ func explode():
 	$Dead_explosion.show()
 	$AnimationPlayer.play("Death_Explosion")
 	yield($AnimationPlayer,"animation_finished")
+	PlayerInfo.change_score(+800)
 	queue_free()
 
 func _on_Go_timeout():

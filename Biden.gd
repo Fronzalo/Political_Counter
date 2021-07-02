@@ -84,9 +84,11 @@ func _physics_process(delta):
 			$Biden.show()
 			firing = false
 			$Go.start()
-	if health <= 0:
+	if health <= 0 and health >= -5:
+		health = -10
+	if health == -10:
 		explode()
-
+		health = -9
 func explode():
 	speed = 0
 	$Go.stop()
@@ -98,8 +100,8 @@ func explode():
 	$EXPLODE.show()
 	$Lazer_animation/AnimationPlayer.play("Explode")
 	yield($Lazer_animation/AnimationPlayer,"animation_finished")
-	PlayerInfo.change_score(+800)
 	queue_free()
+	PlayerInfo.change_score(+800)
 
 
 

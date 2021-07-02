@@ -27,17 +27,7 @@ func get_input():
 			chargetimer = false
 	
 	if Input.is_action_just_pressed("Reload"):
-		$ReloadTimer.wait_time = 0.6
-		reload_amount = 0
-		$ReloadTimer.start()
-		$ReloadTimer/Reload_Time.start()
-		
-	
-	if Input.is_action_just_released("Reload"):
-		$ReloadTimer.stop()
-		$ReloadTimer/Reload_Time.stop()
-		reload_amount = 0
-		$ReloadTimer.wait_time = 0.3
+		PlayerInfo.change_shots(+1)
 		
 		
 #	if Input.is_action_just_pressed("shoot"):
@@ -55,6 +45,7 @@ func _process(delta):
 	if PlayerInfo.get_health() <= 0 or PlayerInfo.get_health() >= 9:
 		get_tree().reload_current_scene()
 		PlayerInfo.reset()
+	#$ArmPosition/Arm/Sprite.position = $ArmPosition
 
 func _physics_process(delta):
 	get_input()
