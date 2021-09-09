@@ -25,7 +25,7 @@ func _process(delta):
 		can_spawn = false
 		$Timer.start()
 	if PlayerInfo.bosspawn() >= 1000:
-		bosstype = floor(rand_range(1,3))
+		bosstype = 1 #floor(rand_range(1,3))
 		if bosstype == 1:
 			trump()
 		else:

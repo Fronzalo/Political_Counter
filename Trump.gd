@@ -13,7 +13,6 @@ onready var spawner = get_parent().get_node("Enemy_Spawner")
 var speed = 150
 var velocity 
 var move = true
-var side
 var s 
 var size
 var target = Vector2.ZERO
@@ -27,9 +26,13 @@ onready var max_missiles = 0
 var health = 20
 onready var misslepos = $Missile_Position.position.x
 onready var lazerpos = $Lazer_Position.position.x
-
-
+var side = "right"
+ 
 									###     BEHAVIOUR CODE     ###							
+
+
+func get_side():
+	return(side)
 
 func _ready():
 	add_to_group("enemies")

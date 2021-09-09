@@ -8,6 +8,8 @@ var side
 var movex = 0
 var movey = 0
 var shoot
+var drop
+var powerdrop = preload("res://Powerup.tscn")
 var s 
 onready var bullet = preload("res://Enemyprojectile.tscn")
 var target = Vector2.ZERO
@@ -28,6 +30,11 @@ func _process(delta):
 			PlayerInfo.republican_killed(1)
 		PlayerInfo.change_score(350)
 		PlayerInfo.boss_counter(350)
+		drop = floor(rand_range(1,6))
+		if drop == 1:
+			var d = powerdrop.instance()
+			d.global_position = global_position
+			get_parent().add_child(d)
 		queue_free()
 		
 		

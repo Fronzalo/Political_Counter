@@ -6,7 +6,7 @@ onready var player = get_parent().get_node("Player")
 var movement
 var size
 onready var target = Vector2.ZERO
-var side
+var side = "left"
 var speed = 100
 var started = false
 var moving 
@@ -21,7 +21,7 @@ var pellets
 var spawn_number
 var clip
 var clip_fired = 0
-var health = 5 #20
+var health = 20
 onready var bullet = preload("res://Enemyprojectile.tscn")
 var enemy = preload("res://Enemy.tscn")
 var shootingenemy = preload("res://Shootingenemy.tscn")
@@ -39,6 +39,9 @@ func _ready():
 
 func change_health(amount):
 	health =- amount
+
+func get_side():
+	return(side)
 
 func _physics_process(delta):
 	if started == false:

@@ -1,5 +1,7 @@
 extends Area2D
 
+var libdeal 
+var repdeal 
 export var bullet_speed = 100
 
 
@@ -33,6 +35,11 @@ func _on_projectile_area_entered(area):
 		yield(get_tree(),"idle_frame")
 	print(area.name)
 	if area.name == "hitbox":
-		area.get_parent().health -= 1
+		var side = area.get_parent().get_side()
+#		area.get_parent().health -= 1
+		if side == "Left":
+			area.get_parent().health -= libdeal
+		else:
+			area.get_parent().health -= repdeal
 		print(area.get_parent().health)
 	queue_free()

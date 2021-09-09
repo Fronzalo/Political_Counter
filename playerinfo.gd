@@ -14,10 +14,16 @@ var score
 var highscore
 var bosscount
 var bossspawn = 1000
+var player_spawn_pos = Vector2(500,300)
+var memes = 0
+var signs = 0
+var guns = 0
+var words = 0
 
 func _ready():
-	health = 5
-	health_max = 9
+	
+	health = 9
+	health_max = 18
 	max_shots = 9
 	max_charges = 3
 	current_charges = 3
@@ -63,8 +69,27 @@ func change_charge(amount):
 	current_charges += amount
 	current_charges = clamp(current_charges,0, max_charges)
 
+func change_memes(amount):
+	memes += amount
+func change_guns(amount):
+	guns += amount
+func change_words(amount):
+	words += amount
+func change_signs(amount):
+	signs += amount
+
+
 func get_charges():
 	return current_charges
+
+func get_memes():
+	return memes
+func get_signs():
+	return signs
+func get_guns():
+	return guns
+func get_words():
+	return words
 
 func get_health():
 	return health
@@ -80,12 +105,16 @@ func get_high():
 
 func reset():
 	current_shots = 9
-	health = 5
+	health = 9
 	libkill = 0
 	repkill = 0
 	if highscore <= score:
 		highscore = score
 	else:
 		highscore = highscore
+	memes = 0 
+	signs = 0
+	guns = 0
+	words = 0
 
 	score = 0
