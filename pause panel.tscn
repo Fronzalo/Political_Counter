@@ -3,12 +3,6 @@
 [ext_resource path="res://Minecraft.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://MinimalUI.tres" type="Theme" id=2]
 
-[sub_resource type="DynamicFont" id=5]
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=6]
-font_data = ExtResource( 1 )
-
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
 
@@ -19,6 +13,12 @@ font_data = ExtResource( 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 1 )
 
 [node name="pause_panel" type="Panel"]
@@ -56,7 +56,7 @@ margin_bottom = 183.0
 [node name="Label" type="Label" parent="CenterContainer/Panel/MarginContainer/VBoxContainer"]
 margin_right = 544.0
 margin_bottom = 16.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 1 )
 text = "                                               PAUSED                                                 "
 
 [node name="Panel" type="MarginContainer" parent="CenterContainer/Panel/MarginContainer/VBoxContainer"]
@@ -117,7 +117,7 @@ margin_bottom = 25.0
 margin_top = 58.0
 margin_right = 140.0
 margin_bottom = 76.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 2 )
 text = "continue?"
 
 [node name="reset" type="Button" parent="CenterContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
@@ -131,6 +131,9 @@ margin_top = 102.0
 margin_right = 140.0
 margin_bottom = 120.0
 text = "quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="charecter health thingo" type="Panel" parent="CenterContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 158.0
@@ -147,21 +150,21 @@ theme = ExtResource( 2 )
 [node name="Score_Counter" type="Label" parent="CenterContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/counter_box"]
 margin_right = 103.0
 margin_bottom = 16.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "SCORE:"
 
 [node name="highscore_counter" type="Label" parent="CenterContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/counter_box"]
 margin_top = 20.0
 margin_right = 103.0
 margin_bottom = 36.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "HIGHSCORE:"
 
 [node name="libkil" type="Label" parent="CenterContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/counter_box"]
 margin_top = 40.0
 margin_right = 103.0
 margin_bottom = 75.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 text = "Liberals
  SILENCED:"
 
@@ -169,7 +172,7 @@ text = "Liberals
 margin_top = 79.0
 margin_right = 103.0
 margin_bottom = 114.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 text = "Republicans
  STOPPED:"
 
@@ -188,7 +191,7 @@ margin_bottom = 45.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/quitconfirm/MarginContainer"]
 margin_right = 199.0
-margin_bottom = 52.0
+margin_bottom = 45.0
 
 [node name="Label" type="Label" parent="CenterContainer/quitconfirm/MarginContainer/VBoxContainer"]
 margin_right = 168.0
