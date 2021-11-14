@@ -3,7 +3,9 @@ extends Control
 
 func _ready():
 	$Healthbar.max_value = PlayerInfo.health_max
-	
+
+#Updates the UI#
+
 func _process(delta):
 	$Healthbar.value = PlayerInfo.get_health()
 	$Reload.value = PlayerInfo.get_shots()

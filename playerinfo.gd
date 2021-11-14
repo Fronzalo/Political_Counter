@@ -15,10 +15,12 @@ var highscore
 var bosscount
 var bossspawn = 1000
 var player_spawn_pos = Vector2(500,300)
+var player_death_pos = Vector2.ZERO
 var memes = 0
 var signs = 0
 var guns = 0
 var words = 0
+var death
 
 func _ready():
 	
@@ -33,6 +35,12 @@ func _ready():
 	libkill = 0
 	repkill = 0
 	bosscount = 0
+
+func get_death(amount):
+	death = amount
+
+func death_get():
+	return death
 
 func boss_counter(amount):
 	bosscount += amount

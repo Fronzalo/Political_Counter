@@ -16,10 +16,12 @@ var health = 3
 func _ready():
 	add_to_group("enemies")
 	s = round(rand_range(1,2))
-	if s == 1:
-		side = "Left"
-	else:
+	if s == 2:
 		side = "Right"
+		$Colour_Changer.play("Become Woke")
+	else:
+		side = "Left"
+		$Colour_Changer.play("Become Based")
 
 
 

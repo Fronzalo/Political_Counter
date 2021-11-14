@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://New Piskel (9).png" type="Texture" id=1]
 [ext_resource path="res://Testing resources/protag_kun.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Minecraft.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://deagal.png" type="Texture" id=14]
 [ext_resource path="res://words.png" type="Texture" id=15]
+[ext_resource path="res://death.png" type="Texture" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12.7566, 3.20574 )
@@ -26,7 +27,19 @@ extents = Vector2( 3.82324, 8.19266 )
 extents = Vector2( 5.46177, 18.9342 )
 
 [sub_resource type="Animation" id=4]
-resource_name = "Idle"
+resource_name = "Death"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Death:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 6, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0, 8, -0.25, 0, 0.25, 0, 9, -0.25, 0, 0.25, 0, 10, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 )
+}
+
+[sub_resource type="Animation" id=5]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -61,8 +74,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.5 )
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "Idle_flipped"
+[sub_resource type="Animation" id=6]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -97,7 +109,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.3 )
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -133,8 +145,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 )
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "reload"
+[sub_resource type="Animation" id=8]
 length = 0.55
 step = 0.05
 tracks/0/type = "value"
@@ -150,8 +161,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0 ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "reload_from"
+[sub_resource type="Animation" id=9]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("reload_swap:frame")
@@ -166,8 +176,7 @@ tracks/0/keys = {
 "values": [ 5, 4, 3, 2, 1, 0 ]
 }
 
-[sub_resource type="Animation" id=9]
-resource_name = "reload_idle"
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath("reload_idle:frame")
 tracks/0/interp = 1
@@ -181,7 +190,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 1 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("reload_swap:frame")
@@ -196,7 +205,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 5, 5, 5, 5, 5 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -232,8 +241,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 )
 }
 
-[sub_resource type="Animation" id=12]
-resource_name = "position_1"
+[sub_resource type="Animation" id=13]
 length = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Selector:position")
@@ -248,8 +256,7 @@ tracks/0/keys = {
 "values": [ Vector2( -32.5597, -0.000160217 ) ]
 }
 
-[sub_resource type="Animation" id=13]
-resource_name = "position_2"
+[sub_resource type="Animation" id=14]
 length = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Selector:position")
@@ -264,8 +271,7 @@ tracks/0/keys = {
 "values": [ Vector2( -10.5246, 0 ) ]
 }
 
-[sub_resource type="Animation" id=14]
-resource_name = "position_3"
+[sub_resource type="Animation" id=15]
 length = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Selector:position")
@@ -280,8 +286,7 @@ tracks/0/keys = {
 "values": [ Vector2( 10.5246, 0 ) ]
 }
 
-[sub_resource type="Animation" id=15]
-resource_name = "position_4"
+[sub_resource type="Animation" id=16]
 length = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Selector:position")
@@ -296,7 +301,7 @@ tracks/0/keys = {
 "values": [ Vector2( 32.2755, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=17]
 font_data = ExtResource( 13 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -370,14 +375,15 @@ position = Vector2( -1.09235, 0.364118 )
 shape = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Idle = SubResource( 4 )
-anims/Idle_flipped = SubResource( 5 )
-anims/Running = SubResource( 6 )
-anims/reload = SubResource( 7 )
-anims/reload_from = SubResource( 8 )
-anims/reload_idle = SubResource( 9 )
-anims/reload_to = SubResource( 10 )
-anims/running_flipped = SubResource( 11 )
+anims/Death = SubResource( 4 )
+anims/Idle = SubResource( 5 )
+anims/Idle_flipped = SubResource( 6 )
+anims/Running = SubResource( 7 )
+anims/reload = SubResource( 8 )
+anims/reload_from = SubResource( 9 )
+anims/reload_idle = SubResource( 10 )
+anims/reload_to = SubResource( 11 )
+anims/running_flipped = SubResource( 12 )
 
 [node name="Chargereload" type="Timer" parent="."]
 wait_time = 5.0
@@ -415,6 +421,15 @@ one_shot = true
 wait_time = 10.0
 one_shot = true
 
+[node name="Death" type="Sprite" parent="."]
+visible = false
+position = Vector2( -0.910295, -7.45058e-09 )
+scale = Vector2( 0.907261, 0.907261 )
+texture = ExtResource( 16 )
+hframes = 3
+vframes = 4
+frame = 10
+
 [node name="Inventory" type="Sprite" parent="."]
 visible = false
 position = Vector2( 9.53674e-07, -27.673 )
@@ -422,10 +437,10 @@ scale = Vector2( 0.518953, 0.518953 )
 texture = ExtResource( 11 )
 
 [node name="position" type="AnimationPlayer" parent="Inventory"]
-anims/position_1 = SubResource( 12 )
-anims/position_2 = SubResource( 13 )
-anims/position_3 = SubResource( 14 )
-anims/position_4 = SubResource( 15 )
+anims/position_1 = SubResource( 13 )
+anims/position_2 = SubResource( 14 )
+anims/position_3 = SubResource( 15 )
+anims/position_4 = SubResource( 16 )
 
 [node name="Meme" type="Sprite" parent="Inventory"]
 position = Vector2( -31.752, -0.364548 )
@@ -459,7 +474,7 @@ margin_top = 3.6362
 margin_right = 18.7273
 margin_bottom = 19.6362
 rect_scale = Vector2( 0.6, 0.6 )
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 17 )
 text = "1x"
 __meta__ = {
 "_edit_use_anchors_": false

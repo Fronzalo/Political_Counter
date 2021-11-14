@@ -14,8 +14,12 @@ var amount_sign
 var amount_words 
 var inventory_pos = 1
 var inventory_item
-var libdeal = 1
+var libdeal = 1                    #Inital variables#
 var repdeal = 1
+var xpos
+var ypos
+onready var size = get_viewport().get_visible_rect().size
+#Reload states#
 
 func reload():
 	state = "reloading"
@@ -55,6 +59,7 @@ func leave_reloading():
 	$reload_swap.hide()
 	state = null
 
+#Movement Code#
 
 func move():
 	velocity.x = Input.get_action_strength("right") - Input.get_action_strength("left")
@@ -92,9 +97,11 @@ func move():
 		print("hello")
 		state = "inventory"
 
+#State implimentation#
+
 func get_input():
 
-	if state != "reloading" and state != "reload" and state != "Actively Reloading" and state != "page flip" and state != "leave reloading" and state != "inventory" and state != "Active Inventory" and state != "Leaving Inventory" and state != "Select":
+	if state != "reloading" and state != "reload" and state != "Actively Reloading" and state != "page flip" and state != "leave reloading" and state != "inventory" and state != "Active Inventory" and state != "Leaving Inventory" and state != "Select" and state != "Death":
 		state = "moving"
 	impliment_state()
 
@@ -118,7 +125,47 @@ func impliment_state():
 			select()
 		"Leaving Inventory":
 			leave_inventory()
-			
+		"Death":
+			death()
+
+
+#Death!#
+
+func death():
+	PlayerInfo.player_death_pos = global_position
+	position.x = PlayerInfo.player_spawn_pos.x
+	position.y = PlayerInfo.player_spawn_pos.y
+	size = get_viewport().get_visible_rect().size
+	if global_position.x != size.x/2 and global_position.y != size.y/2: #((512, 300)
+#		var target = Vector2(0,0)
+#		target.x = size.x/2
+#		target.y = size.y/2
+#		position = position.move_toward(target,speed * 0.001)
+		$Inventory.hide()
+		$reload_idle.hide()
+		$reload.hide()
+		$reload_swap.hide()
+		$reload_idle.hide()
+		$Run_animation.hide()
+		$ArmPosition.hide()
+		$Sprite.show()
+	else:
+		$ArmPosition.hide()
+		$Sprite.hide()
+		$Inventory.hide()
+		$reload_idle.hide()
+		$reload.hide()
+		$reload_swap.hide()
+		$reload_idle.hide()
+		$Run_animation.hide()
+		$Death.show()
+		$AnimationPlayer.play("Death")
+		
+	
+
+
+#inventory state#
+
 
 func inventory():
 	$Sprite.hide()
@@ -244,11 +291,19 @@ func _on_chargetimer_timeout():
 	chargetimer = true
 	print("Charged!")
 
+#Death code#
 
 func _process(delta):
 	if PlayerInfo.get_health() <= 0 or PlayerInfo.get_health() >= 18:
-		get_tree().reload_current_scene()
-		PlayerInfo.reset()
+		xpos = position.x
+		ypos = position.y
+		PlayerInfo.player_spawn_pos = Vector2(xpos, ypos)
+		if PlayerInfo.get_health() <= 0:
+			PlayerInfo.get_death(2)
+		if PlayerInfo.get_health() >= 18:
+			PlayerInfo.get_death(1)
+		get_tree().change_scene("res://Death Scene.tscn")
+
 #
 #		if amount_meme == 0:
 #			$Inventory/Meme.set_self_modulate(1,1,1,0.5)
@@ -285,6 +340,8 @@ func _physics_process(delta):
 #			$AnimationPlayer.play("Idle_flipped")
 #		else:
 #			$AnimationPlayer.play("Idle")
+
+#Shooting codes#
 
 func shoot():
 	if PlayerInfo.current_shots >= 1 and not Input.is_action_pressed("Reload"):
@@ -324,6 +381,9 @@ func _on_ReloadTimer_timeout():
 	else:
 		$ReloadTimer.wait_time = 0.05
 
+
+#ON READY VARIABLES#
+
 func _ready():
 	add_to_group("player")
 	global_position = PlayerInfo.player_spawn_pos
@@ -333,6 +393,8 @@ func _ready():
 	amount_sign = PlayerInfo.get_signs()
 	amount_meme = PlayerInfo.get_memes()
 	
+
+#If the player is hit# 
 
 
 func _on_HitBox_area_entered(area):
@@ -355,6 +417,7 @@ func _on_Chargereload_timeout():
 	PlayerInfo.change_charge(+1)
 	$Chargereload.start()
 
+#Resets how much damage the player deals to liberals or repubicans# 
 
 func _on_Libtimer_timeout():
 	libdeal = 1

@@ -6,7 +6,9 @@ onready var end = $End
 onready var raycast2d = $RayCast2D
 var body
 var enabled = false
-	
+
+#Lazerbeam hitbox#
+
 func _physics_process(delta):
 	$AnimationPlayer.play("lazer flash")
 	$AnimationPlayer.playback_speed = 6
@@ -17,6 +19,7 @@ func _physics_process(delta):
 		end.global_position = raycast2d.cast_to
 	beam.region_rect.end.x = end.position.length()*10
 
+#when the lazerbeam hits the player#
 
 func _on_hitscan_timeout():
 	body = $RayCast2D.get_collider()

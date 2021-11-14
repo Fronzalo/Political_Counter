@@ -15,13 +15,18 @@ onready var bullet = preload("res://Enemyprojectile.tscn")
 var target = Vector2.ZERO
 var health = 2
 
+
 func _ready():
 	add_to_group("enemies")
 	s = round(rand_range(1,2))
-	if s == 1:
-		side = "Left"
-	else:
+	if s == 2:
 		side = "Right"
+		$Colour_Changer.play("Become Woke")
+	else:
+		side = "Left"
+		$Colour_Changer.play("Become Based")
+
+
 func _process(delta):
 	if health <= 0:
 		if side == "Left":

@@ -7,6 +7,7 @@ var velocity = Vector2()
 var x_pos
 onready var is_flipped = true
 
+#The arm turns to point the cursor#
 
 func get_input():
 
